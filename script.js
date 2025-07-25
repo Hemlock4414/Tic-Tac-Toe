@@ -114,7 +114,7 @@ function disableAllClicks() {
 function drawWinLine(indices) {
     const startCell = document.getElementById(`cell-${indices[0]}`).getBoundingClientRect();
     const endCell   = document.getElementById(`cell-${indices[2]}`).getBoundingClientRect();
-    const tableRect = document.querySelector('table').getBoundingClientRect();
+    const containerRect = document.getElementById('content').getBoundingClientRect();
 
     // Berechne die Koordinaten so, dass sie **vom Rand zu Rand** der äußeren Zellen gehen
     const cellWidth = startCell.width;
@@ -129,26 +129,26 @@ function drawWinLine(indices) {
     let x1, y1, x2, y2;
 
     if (isHorizontal) {
-        x1 = startCell.left - tableRect.left + 5;
-        y1 = startCell.top + cellHeight / 2 - tableRect.top;
-        x2 = endCell.right - tableRect.left - 5;
+        x1 = startCell.left - containerRect.left + 5;
+        y1 = startCell.top + cellHeight / 2 - containerRect.top;
+        x2 = endCell.right - containerRect.left - 5;
         y2 = y1;
     } else if (isVertical) {
-        x1 = startCell.left + cellWidth / 2 - tableRect.left;
-        y1 = startCell.top - tableRect.top + 5;
+        x1 = startCell.left + cellWidth / 2 - containerRect.left;
+        y1 = startCell.top - containerRect.top + 5;
         x2 = x1;
-        y2 = endCell.bottom - tableRect.top - 5;
+        y2 = endCell.bottom - containerRect.top - 5;
     } else if (isDiagonalLR) {
-        x1 = startCell.left - tableRect.left + 5;
-        y1 = startCell.top - tableRect.top + 5;
-        x2 = endCell.right - tableRect.left - 5;
-        y2 = endCell.bottom - tableRect.top - 5;
+        x1 = startCell.left - containerRect.left + 5;
+        y1 = startCell.top - containerRect.top + 5;
+        x2 = endCell.right - containerRect.left - 5;
+        y2 = endCell.bottom - containerRect.top - 5;
     } else if (isDiagonalRL) {
-        x1 = endCell.left - tableRect.left + 5;
-        y1 = startCell.top - tableRect.top + 5;
-        x2 = startCell.right - tableRect.left - 5;
-        y2 = endCell.bottom - tableRect.top - 5;
-    }
+    x1 = startCell.right - containerRect.left - 5;
+    y1 = startCell.top - containerRect.top + 5;
+    x2 = endCell.left - containerRect.left + 5;
+    y2 = endCell.bottom - containerRect.top - 5;
+}
 
     const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
     line.setAttribute("x1", x1);
@@ -161,12 +161,12 @@ function drawWinLine(indices) {
 
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.style.position = "absolute";
-    svg.style.top = `${tableRect.top}px`;
-    svg.style.left = `${tableRect.left}px`;
-    svg.setAttribute("width", tableRect.width);
-    svg.setAttribute("height", tableRect.height);
+    svg.style.top = "0";
+    svg.style.left = "0";
+    svg.setAttribute("width", containerRect.width);
+    svg.setAttribute("height", containerRect.height);
     svg.style.pointerEvents = "none";
     svg.appendChild(line);
 
-    document.body.appendChild(svg);
+    document.getElementById('content').appendChild(svg);
 }

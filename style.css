@@ -15,6 +15,10 @@ body {
     height: 80vh;
 }
 
+#content {
+    position: relative;
+}
+
 table {
     margin-top: 100px;
     border-collapse: collapse;
