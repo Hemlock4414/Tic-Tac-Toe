@@ -1,0 +1,51 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #323232;
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+table {
+    margin-top: 100px;
+    border-collapse: collapse;
+}
+
+td {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 48px;
+    font-weight: bold;
+    color: white;
+}
+
+td:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+}
+
+/* Nur innere Linien sichtbar, 5px dick, weiß */
+td {
+    border: 0;
+}
+
+/* horizontale Linien */
+tr:not(:last-child) td {
+    border-bottom: 5px solid white;
+}
+
+/* vertikale Linien */
+td:not(:last-child) {
+    border-right: 5px solid white;
+}
