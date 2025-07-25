@@ -23,6 +23,7 @@ let currentShape = circle;
 
 function init() {
     render();
+    updateCurrentPlayerDisplay();
 }
 
 function generateCircleSVG() {
@@ -59,8 +60,9 @@ function handleClick(index) {
     }
 
     td.removeAttribute('onclick');
+    updateCurrentPlayerDisplay();
 
-    // 🧠 Gewinn prüfen
+    // Gewinn prüfen
     checkForWin();
 }
 
@@ -98,6 +100,7 @@ function checkForWin() {
         if (fields[a] && fields[a] === fields[b] && fields[a] === fields[c]) {
             drawWinLine(combo);
             disableAllClicks();
+            document.getElementById('current-player').innerHTML = '<span class="game-over">Spiel beendet</span>';
             return true;
         }
     }
@@ -169,4 +172,29 @@ function drawWinLine(indices) {
     svg.appendChild(line);
 
     document.getElementById('content').appendChild(svg);
+}
+
+function restartGame() {
+    fields = [null, null, null, null, null, null, null, null, null];
+    currentShape = circle;
+
+    // Entferne evtl. vorhandene Gewinnlinie(n)
+    // const existingSVGs = document.querySelectorAll('#content svg');
+    // existingSVGs.forEach(svg => svg.remove());
+
+    render();
+    updateCurrentPlayerDisplay();
+}
+
+function updateCurrentPlayerDisplay() {
+    const container = document.getElementById('current-player');
+    let symbol;
+
+    if (currentShape === circle) {
+        symbol = generateCircleSVG();
+    } else {
+        symbol = generateCrossSVG();
+    }
+
+    container.innerHTML = `${symbol}<span>ist an der Reihe</span>`;
 }

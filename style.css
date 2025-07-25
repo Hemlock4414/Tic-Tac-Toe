@@ -12,15 +12,36 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    height: 100vh;
 }
 
-#content {
+h1 {
+    font-size: 48px;
+}
+
+.current-player {
+    font-size: 20px;
+    margin: 40px 0;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.game-over {
+    color: #FF0000;
+    font-weight: bold;
+    font-size: 32px;
+    height: 70px;
+}
+
+.content {
     position: relative;
 }
 
 table {
-    margin-top: 100px;
+    margin-top: 20px;
     border-collapse: collapse;
 }
 
@@ -52,4 +73,26 @@ tr:not(:last-child) td {
 /* vertikale Linien */
 td:not(:last-child) {
     border-right: 5px solid white;
+}
+
+.restart-button {
+    margin-top: 50px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #00B0EF;
+    color: white;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.restart-button:hover {
+    background-color: #0099cc;
+}
+
+.restart-button:active {
+    transform: scale(0.97);
 }
